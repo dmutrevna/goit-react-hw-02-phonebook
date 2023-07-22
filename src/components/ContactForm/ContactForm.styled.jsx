@@ -1,71 +1,79 @@
-import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
+import styled from 'styled-components';
 
-export class ContactForm extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+export const AppContainer = styled.div`
+  background-color: #f7f7f7;
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
 
-  handleChange = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  };
+export const TitlePhone = styled.h1`
+  text-align: center;
+  font-weight: bold;
+  font-size: 36px;
+  padding-bottom: 30px;
+  padding-top: 10px;
+  color: rgb(29, 30, 30);
+  text-transform: uppercase;
+  text-shadow: 10px 10px 10px rgba(197, 248, 231, 0.9);
+`;
 
-  handleSubmit = event => {
-    event.preventDefault();
-    const { name, number } = this.state;
-    const { contacts } = this.state;
+export const TitleContacts = styled.h2`
+  text-align: center;
+  font-weight: bold;
+  font-size: 26px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+`;
 
-    const isContactPresent = contacts.find(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
-    );
+export const SubTitle = styled.h3`
+  font-size: 18px;
+  padding-bottom: 4px;
+`;
 
-    if (isContactPresent) {
-      alert(`${name} is already in contacts!`);
-      return;
-    }
+export const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
-
-    this.setState({
-      contacts: [...this.state.contacts, newContact],
-      name: '',
-      number: '',
-    });
-  };
-
-  render() {
-    const { name, number } = this.state;
-
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <h2>Name</h2>
-        <input
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-          value={name}
-          onChange={this.handleChange}
-        />
-        <h2>Number</h2>
-        <input
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-          value={number}
-          onChange={this.handleChange}
-        />
-        <button type="submit">Add contact</button>
-      </form>
-    );
+  h2 {
+    margin-bottom: 8px;
   }
-}
+
+  input {
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+
+    &:focus {
+      border-color: rgb(197, 248, 231);
+    }
+  }
+
+  button {
+    width: 150px;
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: rgb(197, 248, 231);
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    margin: auto;
+
+    &:hover {
+      background-color: rgb(173, 245, 221);
+      transform: scale(1.1);
+    }
+  }
+`;
