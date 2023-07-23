@@ -4,15 +4,11 @@ import PropTypes from 'prop-types';
 
 export class ContactList extends Component {
   render() {
-    const { contacts, filter, onDeleteContact } = this.props;
-
-    const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
+    const { contacts, onDeleteContact } = this.props;
 
     return (
       <ul>
-        {filteredContacts.map(contact => (
+        {contacts.map(contact => (
           <ContactItem
             key={contact.id}
             contact={contact}
@@ -32,4 +28,5 @@ ContactList.propTypes = {
       number: PropTypes.string.isRequired,
     })
   ).isRequired,
+  onDeleteContact: PropTypes.func.isRequired,
 };
